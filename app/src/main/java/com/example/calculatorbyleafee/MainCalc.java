@@ -2,7 +2,6 @@ package com.example.calculatorbyleafee;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.example.calculatorbyleafee.lib.expression.ErrorExpressionException;
 import com.example.calculatorbyleafee.lib.expression.Expression;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,7 +65,8 @@ public class MainCalc extends AppCompatActivity {
                 case R.id.button_opEqual:
                     try {
                         expression = new StringBuilder(
-                                String.valueOf(Expression.calculate(expression.toString(), true)));
+                                String.format("%t .7f",
+                                        Expression.calculate(expression.toString(), true)));
                     } catch (ErrorExpressionException e) {
                         expression = new StringBuilder(e.getMessage());
                     }
