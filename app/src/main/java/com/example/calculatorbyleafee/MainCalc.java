@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.calculatorbyleafee.lib.expression.ErrorExpressionException;
+import com.example.calculatorbyleafee.lib.expression.Expression;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,9 +44,13 @@ public class MainCalc extends AppCompatActivity {
                 case R.id.button_opMinus: expression.append('-'); break;
                 case R.id.button_opMulti: expression.append('*'); break;
                 case R.id.button_opDiv: expression.append('/'); break;
+                case R.id.button_opPow: expression.append('^'); break;
+                case R.id.button_opSin: expression.append("sin("); break;
+                case R.id.button_opCos: expression.append("cos("); break;
+                case R.id.button_opTan: expression.append("tan("); break;
+                case R.id.button_opMod: expression.append("mod"); break;
                 case R.id.button_opLeftParentheses: expression.append('('); break;
                 case R.id.button_opRightParentheses: expression.append(')'); break;
-                case R.id.button_opMod: expression.append("mod"); break;
 
                 case R.id.button_clearAll:
                     expression = new StringBuilder();
@@ -57,7 +65,12 @@ public class MainCalc extends AppCompatActivity {
                     }
                     break;
                 case R.id.button_opEqual:
-                    // todo calculate
+                    try {
+                        expression = new StringBuilder(
+                                String.valueOf(Expression.calculate(expression.toString(), true)));
+                    } catch (ErrorExpressionException e) {
+                        expression = new StringBuilder(e.getMessage());
+                    }
                     break;
             }
 
@@ -76,9 +89,11 @@ public class MainCalc extends AppCompatActivity {
                 R.id.button_num8, R.id.button_num9, R.id.button_numPoint,
                 R.id.button_opPlus, R.id.button_opMinus, R.id.button_opMulti, R.id.button_opDiv,
                 R.id.button_opLeftParentheses, R.id.button_opRightParentheses,
-                R.id.button_opMod, R.id.button_opEqual,
+                R.id.button_opPow, R.id.button_opMod, R.id.button_opEqual,
+                R.id.button_opSin, R.id.button_opCos, R.id.button_opTan,
                 R.id.button_clearAll, R.id.button_backspace
         );
+
         InputHandler inputHandler = new InputHandler((TextView)findViewById(R.id.textView_expressionShower));
         for (int i = 0; i < buttonsId.size(); ++i) {
             ((Button)findViewById(buttonsId.get(i))).setOnClickListener(inputHandler);

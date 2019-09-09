@@ -46,6 +46,43 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/button_opSin"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="sin" />
+
+            <Button
+                android:id="@+id/button_opCos"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="cos" />
+
+            <Button
+                android:id="@+id/button_opTan"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="tan" />
+
+            <Button
+                android:id="@+id/button_opPow"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="^" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
                 android:id="@+id/button_opMod"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -203,5 +240,6 @@
                 android:layout_weight="1"
                 android:text="=" />
         </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
