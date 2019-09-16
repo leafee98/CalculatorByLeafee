@@ -18,10 +18,13 @@
         tools:layout="@layout/fragment_converter" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.calculatorbyleafee.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_radix"
+        android:name="com.example.calculatorbyleafee.ui.radix.RadixFragment"
+        android:label="Radix"
+        tools:layut="@layout/fragment_radix" />
+
+
+
 
     <fragment
         android:id="@+id/nav_slideshow"
