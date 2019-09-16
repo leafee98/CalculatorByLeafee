@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_number_conversion"
-        android:name="com.example.calculatorbyleafee.ui.numberConversion.NumberConversionFragment"
+        android:id="@+id/nav_converter"
+        android:name="com.example.calculatorbyleafee.ui.converter.ConverterFragment"
         android:label="Radix"
-        tools:layout="@layout/fragment_number_conversion" />
+        tools:layout="@layout/fragment_converter" />
 
     <fragment
         android:id="@+id/nav_gallery"
