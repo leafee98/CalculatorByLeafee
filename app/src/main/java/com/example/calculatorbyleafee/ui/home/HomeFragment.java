@@ -7,19 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.calculatorbyleafee.MainCalc;
 import com.example.calculatorbyleafee.R;
 import com.example.calculatorbyleafee.lib.expression.ErrorExpressionException;
 import com.example.calculatorbyleafee.lib.expression.Expression;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -27,7 +24,7 @@ public class HomeFragment extends Fragment {
         private TextView textView;
         private StringBuilder expression = new StringBuilder();
 
-        public InputHandler(TextView textView) {
+        InputHandler(TextView textView) {
             this.textView = textView;
         }
 
@@ -73,10 +70,15 @@ public class HomeFragment extends Fragment {
                     if (expression.toString().length() > 0) {
                         try {
                             expression = new StringBuilder(
-                                    String.format("%.7f",
+                                    String.format(Locale.ENGLISH, "%.7f",
                                             Expression.calculate(expression.toString(), true)));
                         } catch (ErrorExpressionException e) {
-                            expression = new StringBuilder(e.getMessage());
+                            String msg = e.getMessage();
+                            if (msg != null) {
+                                expression = new StringBuilder(msg);
+                            } else {
+                                expression = new StringBuilder("Unknown Error");
+                            }
                         }
                     }
                     break;

@@ -53,6 +53,6 @@ class RadixModel {
     }
 
     String getHex() {
-        return Integer.toHexString(this.value);
+        return Integer.toHexString(this.value).toUpperCase();
     }
 }
