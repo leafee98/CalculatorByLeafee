@@ -45,28 +45,40 @@ public class RadixFragment extends Fragment {
                     case BIN: val = textViewBin.getText().toString(); break;
                 }
 
+                char appendChar = 0;
                 switch (view.getId()) {
                     case R.id.button_backspace:
-                        if (val.length() != 0)
+                        if (val.length() == 1) {
+                            val = "0";
+                        } else {
                             val = val.substring(0, val.length() - 1);
+                        }
                         break;
                     case R.id.button_clearAll: val = "0"; break;
-                    case R.id.button_num0: val = val + '0'; break;
-                    case R.id.button_num1: val = val + '1'; break;
-                    case R.id.button_num2: val = val + '2'; break;
-                    case R.id.button_num3: val = val + '3'; break;
-                    case R.id.button_num4: val = val + '4'; break;
-                    case R.id.button_num5: val = val + '5'; break;
-                    case R.id.button_num6: val = val + '6'; break;
-                    case R.id.button_num7: val = val + '7'; break;
-                    case R.id.button_num8: val = val + '8'; break;
-                    case R.id.button_num9: val = val + '9'; break;
-                    case R.id.button_numA: val = val + 'A'; break;
-                    case R.id.button_numB: val = val + 'B'; break;
-                    case R.id.button_numC: val = val + 'C'; break;
-                    case R.id.button_numD: val = val + 'D'; break;
-                    case R.id.button_numE: val = val + 'E'; break;
-                    case R.id.button_numF: val = val + 'F'; break;
+                    case R.id.button_num0: appendChar = '0'; break;
+                    case R.id.button_num1: appendChar = '1'; break;
+                    case R.id.button_num2: appendChar = '2'; break;
+                    case R.id.button_num3: appendChar = '3'; break;
+                    case R.id.button_num4: appendChar = '4'; break;
+                    case R.id.button_num5: appendChar = '5'; break;
+                    case R.id.button_num6: appendChar = '6'; break;
+                    case R.id.button_num7: appendChar = '7'; break;
+                    case R.id.button_num8: appendChar = '8'; break;
+                    case R.id.button_num9: appendChar = '9'; break;
+                    case R.id.button_numA: appendChar = 'A'; break;
+                    case R.id.button_numB: appendChar = 'B'; break;
+                    case R.id.button_numC: appendChar = 'C'; break;
+                    case R.id.button_numD: appendChar = 'D'; break;
+                    case R.id.button_numE: appendChar = 'E'; break;
+                    case R.id.button_numF: appendChar = 'F'; break;
+                }
+
+                if (appendChar != 0) {
+                    if (val.equals("0")) {
+                        val = String.valueOf(appendChar);
+                    } else {
+                        val += appendChar;
+                    }
                 }
 
                 updateTextView(val);
@@ -215,7 +227,8 @@ public class RadixFragment extends Fragment {
         this.assignTextViewOnClick();
         this.assignInputAction();
         this.radixModel = new RadixModel();
-        this.currentRadix = Radix.DEC;
+        this.switchRadix(Radix.DEC);
+        this.updateTextView("0");
 
         return root;
     }
