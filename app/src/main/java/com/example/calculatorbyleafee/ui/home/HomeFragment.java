@@ -20,6 +20,8 @@ import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
+    private View root;
+
     private static class InputHandler implements View.OnClickListener {
         private TextView textView;
         private StringBuilder expression = new StringBuilder();
@@ -90,7 +92,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // set onClick Listener
         List<Integer> buttonsId = Arrays.asList(
@@ -104,12 +106,24 @@ public class HomeFragment extends Fragment {
                 R.id.button_clearAll, R.id.button_backspace
         );
 
+        TextView expressionShower = root.findViewById(R.id.textView_expressionShower);
         InputHandler inputHandler =
-                new InputHandler((TextView)root.findViewById(R.id.textView_expressionShower));
+                new InputHandler(expressionShower);
         for (int i = 0; i < buttonsId.size(); ++i) {
             (root.findViewById(buttonsId.get(i))).setOnClickListener(inputHandler);
         }
 
+        if (savedInstanceState != null) {
+            expressionShower.setText(savedInstanceState.getString("expression"));
+        }
+
         return root;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        TextView tv = root.findViewById(R.id.textView_expressionShower);
+        outState.putString("expression", tv.getText().toString());
     }
 }

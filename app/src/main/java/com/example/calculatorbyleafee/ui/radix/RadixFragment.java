@@ -1,6 +1,8 @@
 package com.example.calculatorbyleafee.ui.radix;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ public class RadixFragment extends Fragment {
 
     private RadixModel radixModel;
     private enum Radix { HEX, DEC, OCT, BIN }
+
     private Radix currentRadix;
 
     private void assignInputAction() {
@@ -230,6 +233,38 @@ public class RadixFragment extends Fragment {
         this.switchRadix(Radix.DEC);
         this.updateTextView("0");
 
+        if (savedInstanceState != null) {
+            textViewHex.setText(savedInstanceState.getString("hexValue"));
+            textViewDec.setText(savedInstanceState.getString("decValue"));
+            textViewOct.setText(savedInstanceState.getString("octValue"));
+            textViewBin.setText(savedInstanceState.getString("binValue"));
+
+            switch (savedInstanceState.getInt("currentRadix")) {
+                case 1: currentRadix = Radix.HEX; break;
+                case 2: currentRadix = Radix.DEC; break;
+                case 3: currentRadix = Radix.OCT; break;
+                case 4: currentRadix = Radix.BIN; break;
+            }
+        }
+
         return root;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("hexValue", textViewHex.getText().toString());
+        outState.putString("decValue", textViewDec.getText().toString());
+        outState.putString("octValue", textViewOct.getText().toString());
+        outState.putString("binValue", textViewBin.getText().toString());
+
+        switch (currentRadix) {
+            case HEX: outState.putInt("currentRadix", 1); break;
+            case DEC: outState.putInt("currentRadix", 2); break;
+            case OCT: outState.putInt("currentRadix", 3); break;
+            case BIN: outState.putInt("currentRadix", 4); break;
+        }
+
     }
 }
