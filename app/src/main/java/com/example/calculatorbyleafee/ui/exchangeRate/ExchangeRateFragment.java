@@ -191,13 +191,13 @@ public class ExchangeRateFragment extends Fragment {
             }
             textViewCurrentRate.setText(String.format(Locale.ENGLISH,
                     "%s : %s  =  1 : %f", originalCurrency, targetCurrency, rate));
+            enableAllButton();
+            doConvert();
         } else {
             textViewCurrentRate.setText(errorMsg);
         }
         textViewCurrentRate.setVisibility(View.VISIBLE);
         progressBarLoadRate.setVisibility(View.GONE);
-        enableAllButton();
-        doConvert();
     }
 
     private void disableAllButton() {
