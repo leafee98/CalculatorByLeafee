@@ -21,8 +21,13 @@
         android:id="@+id/nav_radix"
         android:name="com.example.calculatorbyleafee.ui.radix.RadixFragment"
         android:label="Radix"
-        tools:layut="@layout/fragment_radix" />
+        tools:layout="@layout/fragment_radix" />
 
+    <fragment
+        android:id="@+id/nav_exchangeRate"
+        android:name="com.example.calculatorbyleafee.ui.exchangeRate.ExchangeRateFragment"
+        android:label="Exchange Rate"
+        tools:layout="@layout/fragment_exchange_rate" />
 
 
 
