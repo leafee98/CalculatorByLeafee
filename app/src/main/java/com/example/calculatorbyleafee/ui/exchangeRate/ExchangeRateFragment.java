@@ -277,8 +277,31 @@ public class ExchangeRateFragment extends Fragment {
         assignViewOnClick();
         assignSpinner();
 
+        if (savedInstanceState != null) {
+            switchActive(savedInstanceState.getInt("active"));
+            textViewValue1.setText(savedInstanceState.getString("currency1"));
+            textViewValue2.setText(savedInstanceState.getString("currency2"));
+            spinnerCurrency1.setSelection(savedInstanceState.getInt("currencyType1"));
+            spinnerCurrency2.setSelection(savedInstanceState.getInt("currencyType2"));
+        }
+
 
         return root;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        String currency1 = textViewValue1.getText().toString();
+        String currency2 = textViewValue2.getText().toString();
+        int currencyType1 = spinnerCurrency1.getSelectedItemPosition();
+        int currencyType2 = spinnerCurrency2.getSelectedItemPosition();
+
+        outState.putString("currency1", currency1);
+        outState.putString("currency2", currency2);
+        outState.putInt("currencyType1", currencyType1);
+        outState.putInt("currencyType2", currencyType2);
+        outState.putInt("active", activeView);
+    }
 }
